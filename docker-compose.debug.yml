@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  authz:
+    image: authz
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+  pg:
+    image: postgres:13
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
