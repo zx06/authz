@@ -1,11 +1,8 @@
 tasks:
-  - before: |
+  - init: |
       docker compose -f "docker-compose.services.yml" up -d --build
-  - init: go build ./...
-    # command: go run
-
-
-
+      go mod download
 vscode:
   extensions:
     - golang.go
+    - ms-azuretools.vscode-docker
