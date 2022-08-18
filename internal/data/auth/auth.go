@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/uptrace/bun"
 	"github.com/zx06/authz/internal/biz"
@@ -33,7 +32,6 @@ func (ar *authRepo) UserGetPermissions(ctx context.Context, db bun.IDB, uid stri
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("\n%#v\n", u)
 	for _, p := range u.Permissions {
 		apMap[p.ID] = p
 	}

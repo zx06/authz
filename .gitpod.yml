@@ -1,4 +1,6 @@
 tasks:
+  - before: |
+      docker compose -f "docker-compose.services.yml" up -d --build
   - init: go build ./...
     # command: go run
 
