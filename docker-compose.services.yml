@@ -1,9 +1,14 @@
 version: '3.4'
 
 services:
-  pg:
+  db:
     image: postgres:13
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
