@@ -1,15 +1,20 @@
 #build stage
 FROM golang:alpine AS builder
-RUN apk add --no-cache git
-WORKDIR /go/src/app
-COPY . .
-RUN go get -d -v ./...
-RUN go build -o /go/bin/app -v ./...
+
+COPY . /src
+WORKDIR /src
+
+RUN GOPROXY=https://goproxy.cn make build
 
 #final stage
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
-COPY --from=builder /go/bin/app /app
-ENTRYPOINT /app
-LABEL Name=authz Version=0.0.1
-EXPOSE 3000
+COPY --from=builder /src/bin /app
+
+WORKDIR /app
+
+EXPOSE 8000
+EXPOSE 9000
+VOLUME /data/conf
+
+CMD ["./server", "-conf", "/data/conf"]

@@ -16,7 +16,7 @@ import (
 
 func NewPG(data *conf.Data) *bun.DB {
 	ctx := context.Background()
-	conn := pgdriver.NewConnector(pgdriver.WithDSN(data.PgDSN))
+	conn := pgdriver.NewConnector(pgdriver.WithDSN(data.Database.GetDsn()))
 	pgdb := sql.OpenDB(conn)
 	db := bun.NewDB(pgdb, pgdialect.New())
 	db.AddQueryHook(
